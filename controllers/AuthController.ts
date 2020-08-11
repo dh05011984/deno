@@ -1,5 +1,5 @@
 import client from "../config/databases.ts";
-import { Status, RouterContext } from "../deps.ts";
+import { Status } from "../deps.ts";
 import EmployeeValidation from "../validators/EmployeeValidation.ts";
 import hash from "../util/hash.ts";
 import EmployeeController from "./EmployeeController.ts";
@@ -9,6 +9,7 @@ import token from "../util/token.ts";
 export default {
   async Login(ctx: any) {
     const value = await EmployeeValidation.validateLogin(ctx);
+    console.log('val', value);
     if (value == undefined || value == false) {
       return;
     }

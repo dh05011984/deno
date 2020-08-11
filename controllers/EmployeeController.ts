@@ -1,18 +1,18 @@
-import { Status, RouterContext } from "../deps.ts";
+import { Status } from "../deps.ts";
 import hash from "../util/hash.ts";
 import Employee from "../models/Employee.ts";
 import employeeHelper from "../businesshelper/EmployeeHelper.ts";
 import EmployeeValidation from "../validators/EmployeeValidation.ts";
 
 export default {
-  async getAllEmployees(ctx:RouterContext) {
+  async getAllEmployees(ctx:any) {
     let employee: Employee;
     employee = await employeeHelper.getAllEmployees();
     ctx.response.status = Status.OK;
     ctx.response.body = employee;   
   },
 
-  async getEmployeeById(ctx: RouterContext) {
+  async getEmployeeById(ctx: any) {
     let employee: Employee;
     employee = await employeeHelper.getEmployeeById(
       parseInt(ctx.params.id || "0")
@@ -20,7 +20,7 @@ export default {
     ctx.response.status = Status.OK;
     ctx.response.body = employee;
   },
-  async createEmployee(ctx: RouterContext) {
+  async createEmployee(ctx: any) {
     const value = await EmployeeValidation.validate(ctx);
     console.log(value);
     if (!value) {
@@ -37,12 +37,12 @@ export default {
       ctx.response.body = { error: error.message };
     }
   },
-  updateEmployee(ctx: RouterContext) {
+  updateEmployee(ctx: any) {
     ctx.response.status = 200;
     // const body = await ctx.request.body();
     ctx.response.body = "Updated " + ctx.params.id;
   },
-  async deleteEmployee(ctx: RouterContext) {
+  async deleteEmployee(ctx: any) {
     let employee = await employeeHelper.getEmployeeById(
       parseInt(ctx.params.id || "0")
     );

@@ -1,10 +1,10 @@
-import { Status, RouterContext } from "../deps.ts";
+import { Status } from "../deps.ts";
 import client from "../config/databases.ts";
 import hash from "../util/hash.ts";
 import EmpPersonalDetail from "../models/EmpPersonalDetail.ts";
 
 export default {
-  async getAllEmpPersonalDetail(ctx: RouterContext) {
+  async getAllEmpPersonalDetail(ctx: any) {
     let employee: EmpPersonalDetail;
     employee = await client.query("select * from EmpPersonalDetail");
     console.log("Employee", employee);
@@ -13,7 +13,7 @@ export default {
     ctx.response.body = employee;
   },
 
-  async getEmployeeById(ctx: RouterContext) {
+  async getEmployeeById(ctx: any) {
     let employee: EmpPersonalDetail;
     employee = await client.query("select ?? from ?? where id =?", [
       "*",
@@ -30,7 +30,7 @@ export default {
     ctx.response.status = Status.OK;
     ctx.response.body = employee;
   },
-  async createEmployee(ctx: RouterContext) {
+  async createEmployee(ctx: any) {
     if (!ctx.request.hasBody) {
       ctx.response.status = 400; // Bad Request
       ctx.response.body = { error: "Please provide the data" };
@@ -62,12 +62,12 @@ export default {
     ctx.response.status = 201;
     ctx.response.body = result;
   },
-  updateEmployee(ctx: RouterContext) {
+  updateEmployee(ctx: any) {
     ctx.response.status = 200;
     // const body = await ctx.request.body();
     ctx.response.body = "Updated " + ctx.params.id;
   },
-  async deleteEmployee(ctx: RouterContext) {
+  async deleteEmployee(ctx: any) {
     //   let employee = await getEmployeeById(ctx.params.id);
     const result = await client.execute(
       "DELETE FROM EmpPersonalDetail WHERE id=?",

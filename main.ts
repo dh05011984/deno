@@ -34,7 +34,7 @@ app.use(oakCors()); // Enable CORS for All Route
 
 app.use(router.routes());
 app.use(router.allowedMethods());
-app.use((ctx: any, next: any) => authMiddleware.authorized(ctx, next)); // for authorization
+// app.use((ctx: any, next: any) => authMiddleware.authorized(ctx, next)); // for authorization
 app.use(protectedRouter.routes());
 app.use(notFound);
 

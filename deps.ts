@@ -1,4 +1,4 @@
-export { Application, Router, RouterContext, Status } from "https://deno.land/x/oak/mod.ts";
+export { Application, Router, RouterContext, Status } from "https://deno.land/x/oak@v6.0.1/mod.ts";
 export * as flags from "https://deno.land/std/flags/mod.ts";
 export { config } from "https://deno.land/x/dotenv/mod.ts";
 export * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";

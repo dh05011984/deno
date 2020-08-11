@@ -1,7 +1,8 @@
-import { Status, RouterContext } from "../deps.ts";
+import { Status } from "../deps.ts";
 export default {
-  async validate(ctx: RouterContext) {
-    const { value } = await ctx.request.body();
+  async validate(ctx: any) {
+    // const { value } = await ctx.request.body();
+    const value  = await (ctx.request.body()).value;
     // console.log("inVal", value);
     if (!ctx.request.hasBody) {
       ctx.response.status = 400; // Bad Request
@@ -38,7 +39,9 @@ export default {
   async validateLogin(ctx: any) {
     let errors = [];
     let status;
-    const { value } = await ctx.request.body();
+    const value  = await (ctx.request.body()).value;
+    // const result = await ctx.request.body();
+    // const {value} =  result;
     if (value == undefined || !value) {
       console.log("jjj");
       ctx.response.status = 400;
