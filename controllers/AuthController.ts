@@ -9,7 +9,7 @@ import token from "../util/token.ts";
 export default {
   async Login(ctx: any) {
     const value = await EmployeeValidation.validateLogin(ctx);
-    console.log('val', value);
+    // console.log('val', value);
     if (value == undefined || value == false) {
       return;
     }

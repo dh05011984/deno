@@ -22,7 +22,7 @@ export default {
   },
   async createEmployee(ctx: any) {
     const value = await EmployeeValidation.validate(ctx);
-    console.log(value);
+    // console.log(value);
     if (!value) {
       return;
     }

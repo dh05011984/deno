@@ -36,7 +36,9 @@ export default {
       ctx.response.body = { error: "Please provide the data" };
       return;
     }
-    const { value } = await ctx.request.body();
+    // const { value } = await ctx.request.body();
+    const value = await (ctx.request.body()).value;
+    console.log('value', value.empId);
     let result = await client.execute(
       `INSERT INTO EmpPersonalDetail(EmpId,FirstName,MidName,LastName,DOB,Gender,BloodGroup,Citizenship,MaritalStatus ,Passport ,Aadhar ,UAN,PAN,SSN ,DrivingLicense ,MarriageDate,Created_by) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
       [

@@ -1,6 +1,6 @@
 // console.log('jai mata di .... dhananjay');
 import { Application, flags } from "./deps.ts";
-import {oakCors} from "./deps.ts";
+import { oakCors } from "./deps.ts";
 // import { config } from "./deps.ts";
 
 import router from "./routes/normal.ts";
@@ -31,7 +31,11 @@ if (isNaN(PORT)) {
 //   optionsSuccessStatus: 200,
 // }));
 app.use(oakCors()); // Enable CORS for All Route
-
+app.use(async (ctx, next) => {
+  await next();
+  const rt = ctx.response.headers.get("X-Response-Time");
+  // console.log(`${ctx.request.method} ${ctx.request.url} - ${rt}`);
+});
 app.use(router.routes());
 app.use(router.allowedMethods());
 // app.use((ctx: any, next: any) => authMiddleware.authorized(ctx, next)); // for authorization
@@ -40,8 +44,8 @@ app.use(notFound);
 
 app.addEventListener("listen", ({ hostname, port, secure }) => {
   console.log(`--- Listening on: ${secure ? "https://" : "http://"}${
-      hostname ?? "localhost"
-      }:${port}`
+    hostname ?? "localhost"
+    }:${port}`
   );
 });
 
